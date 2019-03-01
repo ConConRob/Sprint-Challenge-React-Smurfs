@@ -13,13 +13,22 @@ class App extends Component {
     };
   }
   componentDidMount(){
-    this.getSmurfs();
+    this.readSmurfs();
   }
-  getSmurfs = () =>{
+  readSmurfs = () =>{
     axios.get(url)
       .then(res => this.setSmurfs(res.data))
   }
-
+  createSmurf = (name, age, height) =>{
+    const body={
+      name,
+      age,
+      height
+    }
+    axios.post(url,body)
+      .then(res=> this.setSmurfs(res.data))
+      .catch(err => console.log(err));
+  }
   setSmurfs = (smurfs) =>{
     this.setState({smurfs});
   }
@@ -29,7 +38,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SmurfForm />
+        <SmurfForm createSmurf={this.createSmurf}/>
         <Smurfs smurfs={this.state.smurfs} />
       </div>
     );
