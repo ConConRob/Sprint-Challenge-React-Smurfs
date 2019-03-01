@@ -1,16 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-const Smurf = props => {
+const Smurf = ({name, id, age, height, smurf, deleteSmurf}) => {
+  if(smurf){
+    name = smurf.name;
+    id = smurf.id;
+    age = smurf.age;
+    height = smurf.height;
+  }
   const handleDelete = () =>{
-    props.deleteSmurf(props.id);
+    deleteSmurf(id);
   }
   return (
     <div className="Smurf">
-      <h3>{props.name}</h3>
-      <strong>{props.height} tall</strong>
-      <p>{props.age} smurf years old</p>
+      <Link to={`/smurf/${id}`}>
+        <h3>{name}</h3>
+        <strong>{height} tall</strong>
+        <p>{age} smurf years old</p>
+      </Link>
       <button onClick={handleDelete}>Evict</button>
-      <Link to={`/edit/${props.id}`} >Smurf the Smurf</Link>
+      <Link to={`/edit/${id}`} >Smurf the Smurf</Link>
     </div>
   );
 };

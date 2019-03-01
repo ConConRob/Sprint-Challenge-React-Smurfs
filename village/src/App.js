@@ -4,6 +4,7 @@ import {Route, NavLink} from 'react-router-dom';
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
+import Smurf from './components/Smurf';
 
 const url = 'http://localhost:3333/smurfs';
 class App extends Component {
@@ -85,6 +86,11 @@ class App extends Component {
             smurf={smurf}
             id={id} 
           />
+        }}/>
+        <Route path='/smurf/:id' render={props =>{
+          const id = props.match.params.id;
+          const smurf = this.findSmurfById(id);
+          return <Smurf smurf={smurf}  />
         }}/>      
       </div>
     );
