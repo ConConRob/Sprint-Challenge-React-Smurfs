@@ -6,7 +6,8 @@ class SmurfForm extends Component {
     this.state = {
       name: '',
       age: '',
-      height: ''
+      height: '',
+      id: null,
     };
   }
   componentDidMount() {
@@ -14,8 +15,22 @@ class SmurfForm extends Component {
       this.setState({
         name: this.props.smurf.name,
         age: this.props.smurf.age,
-        height: this.props.smurf.height
+        height: this.props.smurf.height,
+        id: this.props.smurf.id
       })
+    }
+  }
+  componentDidUpdate() {
+    const smurf = this.props.smurf;
+    if(smurf){
+      if(this.state.id!== smurf.id){
+        this.setState({
+          name: this.props.smurf.name,
+          age: this.props.smurf.age,
+          height: this.props.smurf.height,
+          id: this.props.smurf.id
+        })
+      }
     }
   }
 
@@ -61,7 +76,7 @@ class SmurfForm extends Component {
             value={this.state.height}
             name="height"
           />
-          <button type="submit">Add to the village</button>
+          <button type="submit">{!!this.props.smurf?'Edit this Smirf':'Add to the village'}</button>
         </form>
       </div>
     );
