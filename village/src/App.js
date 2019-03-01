@@ -1,12 +1,40 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Route, NavLink} from 'react-router-dom';
+import styled from 'styled-components';
 import './App.css';
 import SmurfForm from './components/SmurfForm';
 import Smurfs from './components/Smurfs';
 import Smurf from './components/Smurf';
 
 const url = 'http://localhost:3333/smurfs';
+
+const SyledApp = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  nav {
+    width: 100%;
+    height: 60px;
+    background: #00B8EA;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    
+    a{
+      font-size: 20px;
+      color: white;
+      text-decoration: none;
+      
+    }
+    .active{
+        color: #C52733;
+      }
+  }
+`
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +89,7 @@ class App extends Component {
   // You'll need to make sure you have the right properties on state and pass them down to props.
   render() {
     return (
-      <div className="App">
+      <SyledApp>
           <nav>
             <NavLink exact to='/' >Village</NavLink>
             <NavLink exact to='/smurf-form' >Move Smurf In</NavLink>
@@ -90,9 +118,10 @@ class App extends Component {
         <Route path='/smurf/:id' render={props =>{
           const id = props.match.params.id;
           const smurf = this.findSmurfById(id);
+
           return <Smurf smurf={smurf}  />
         }}/>      
-      </div>
+      </SyledApp>
     );
   }
 }

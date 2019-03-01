@@ -1,4 +1,38 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const StyledSmurfForm = styled.div`
+ 
+  width: 400px;
+  margin-top: 40px;
+
+  form{
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    justify-content: space-around;
+    input{
+      padding: 10px;
+      transition: all .5s;
+      border: 1px solid #00B8EA;
+      &:focus{
+        background:#00B8EA;
+        color: white;
+        font-size: 18px;
+        padding: 8px 10px;
+      }
+    }
+    button{
+      padding: 10px;
+      transition: all .5s;
+      border: none;
+      &:hover{
+        background:#00B8EA;
+        color: white;
+      }
+    }
+  }
+`
 
 class SmurfForm extends Component {
   constructor(props) {
@@ -56,7 +90,7 @@ class SmurfForm extends Component {
 
   render() {
     return (
-      <div className="SmurfForm">
+      < StyledSmurfForm>
         <form onSubmit={this.addSmurf}>
           <input
             onChange={this.handleInputChange}
@@ -78,7 +112,7 @@ class SmurfForm extends Component {
           />
           <button type="submit">{!!this.props.smurf?'Edit this Smirf':'Add to the village'}</button>
         </form>
-      </div>
+      </ StyledSmurfForm>
     );
   }
 }
