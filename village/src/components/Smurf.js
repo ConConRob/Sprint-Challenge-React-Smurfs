@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 const Smurf = props => {
   const handleDelete = () =>{
     props.deleteSmurf(props.id);
@@ -10,6 +10,7 @@ const Smurf = props => {
       <strong>{props.height} tall</strong>
       <p>{props.age} smurf years old</p>
       <button onClick={handleDelete}>Evict</button>
+      <Link to={`/edit/${props.id}`} >Smurf the Smurf</Link>
     </div>
   );
 };

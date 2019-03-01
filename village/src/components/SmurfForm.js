@@ -9,11 +9,25 @@ class SmurfForm extends Component {
       height: ''
     };
   }
+  componentDidMount() {
+    if(this.props.smurf){
+      this.setState({
+        name: this.props.smurf.name,
+        age: this.props.smurf.age,
+        height: this.props.smurf.height
+      })
+    }
+  }
+
 
   addSmurf = event => {
     event.preventDefault();
     // add code to create the smurf using the api
-    this.props.createSmurf(this.state.name, this.state.age, this.state.height)
+    let id =null;
+    if(this.props.smurf){
+      id=this.props.smurf.id
+    }
+    this.props.methodSmurf(this.state.name, this.state.age, this.state.height, id)
     this.setState({
       name: '',
       age: '',

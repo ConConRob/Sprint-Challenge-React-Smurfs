@@ -37,6 +37,21 @@ class App extends Component {
       .catch(err=>console.log(err));
   }
 
+  updateSmurf = ( name, age, height,id) => {
+    const body = {
+      name,
+      age,
+      height,
+    }
+    axios.put(url+'/'+id, body)
+      .then(res=> this.setSmurfs(res.data))
+      .catch(err=>console.log(err));
+  }
+
+  findSmurfById = (id) => {
+    return this.state.smurfs.find(smurf=> smurf.id.toString() === id);
+  }
+
   setSmurfs = (smurfs) =>{
     this.setState({smurfs});
   }
@@ -51,13 +66,26 @@ class App extends Component {
             <NavLink exact to='/smurf-form' >Move Smurf In</NavLink>
 
           </nav>
-        <Route path='/smurf-form' render={props => <SmurfForm createSmurf={this.createSmurf}/>}/>
+        <Route path='/smurf-form' render={props => 
+          <SmurfForm 
+            methodSmurf={this.createSmurf}
+          />
+        }/>
         <Route exact path='/' render={()=>
           <Smurfs 
             smurfs={this.state.smurfs}
             deleteSmurf={this.deleteSmurf} 
           />
-        }/>       
+        }/>
+        <Route path='/edit/:id' render={props =>{ 
+          const id = props.match.params.id;
+          const smurf = this.findSmurfById(id);
+          return <SmurfForm
+            methodSmurf={this.updateSmurf}
+            smurf={smurf}
+            id={id} 
+          />
+        }}/>      
       </div>
     );
   }
